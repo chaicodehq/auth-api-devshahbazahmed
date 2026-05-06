@@ -8,5 +8,11 @@ import mongoose from 'mongoose';
  * 3. Return mongoose.connection
  */
 export async function connectDB(uri) {
-  // Your code here
+  if (uri) {
+    const conn = await mongoose.connect(uri);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    return conn;
+  } else {
+    throw new Error('MongoDB URI is required');
+  }
 }
